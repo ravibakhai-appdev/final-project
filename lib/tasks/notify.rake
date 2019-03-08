@@ -33,6 +33,4 @@ auth_token = 'a650751c70dfe323924261b4d07647c4'
   body: 'Hey there!'
 )
   
-## something to proxy git 
-  
 end
