@@ -7,39 +7,39 @@
 <hr>
 
 <form action="/create_customized_preference" method="post">
-
+  
   <div class="form-group">
     <label for="event_id">
       Event
     </label>
 
-    <input type="text" id="event_id" name="event_id" class="form-control">
+    <%= select_tag("event_id", options_from_collection_for_select(Event.all, :id, :name), :class => "form-control") %>
+    or <a href="/events/new">Add a new event</a> first
   </div>
 
+
+
   <div class="form-group">
-    <label for="user_id">
-      User
+    <input type="hidden" id="user_id" name="user_id" value="<%=current_user.id%>" class="form-control">
+  </div>
+
+
+<div class="form-group">
+    <label for="goal_id">
+      Goal
     </label>
 
-    <input type="text" id="user_id" name="user_id" class="form-control">
+    <%= select_tag("goal_id", options_from_collection_for_select(Goal.where(user_id: current_user.id), :id, :name), :class => "form-control") %>
+    or <a href="/goals/new">Add a new goal</a> first
   </div>
 
   <div class="form-group">
     <label for="transaction_amount">
       Transaction amount
     </label>
-
-    <input type="text" id="transaction_amount" name="transaction_amount" class="form-control">
+    <%= select_tag("transaction_amount", options_for_select([['$0.25', 0.25], ['$0.50', 0.5], ['$1', 1], ['$2', 2], ['$5', 5], ['$10', 10]]), :class => "form-control") %>
   </div>
-
-  <div class="form-group">
-    <label for="goal_id">
-      Goal
-    </label>
-
-    <input type="text" id="goal_id" name="goal_id" class="form-control">
-  </div>
-
+  
   <button class="btn btn-block btn-outline-secondary">
     Create customized preference
   </button>
