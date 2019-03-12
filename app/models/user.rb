@@ -13,6 +13,8 @@
 #  bio                    :string
 #  created_at             :datetime         not null
 #  updated_at             :datetime         not null
+#  username               :string
+#  location               :string
 #
 # Indexes
 #
@@ -27,7 +29,9 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable
          
          #bio hash is a dummy for username
-  validates :bio, :presence => true, :uniqueness => true
+  validates :username, :presence => true, :uniqueness => true
+  validates :location, :presence => true
+
   
   validates :first_name, :presence => true
   
