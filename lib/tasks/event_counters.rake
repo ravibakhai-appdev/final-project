@@ -13,14 +13,19 @@ longitude = parsed_data.dig("results", 0, "geometry", "location", "lng")
 url_dos = "https://api.darksky.net/forecast/8707954d64e5b10beab32c74ed9d5927/#{latitude.to_s},#{longitude.to_s}"
 parsed_data_dos = JSON.parse(open(url_dos).read)
 
-    @current_temperature = parsed_data_dos.dig("currently","temperature")
-
-    @daily_low = parsed_data_dos.dig("daily","data","temperatureLow")
-
-  if @daily_low.to_i < 300
-      @total= Goal.find_by(id: preference.goal_id).current_amount.to_f
-      @total= @total.to_f + 1
-      @total.save
+    @current_temperature = parsed_data_dos.dig("currently","temperature").to_i
+    
+  #   @daily_low = parsed_data_dos.dig("daily","data[0]","temperatureLow").to_i
+  # ap(@daily_low)
+  
+  if @current_temperature < 300
+      @total= Goal.find_by(id: preference.goal_id).current_amount.to_i
+      @total= @total + 1
+      @total= @total.to_s
+      @a=Goal.find_by(id: preference.goal_id)
+      @a.current_amount= @total
+      @a.save
+      
     else
   end
   end
