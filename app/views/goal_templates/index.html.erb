@@ -1,0 +1,87 @@
+<div class="row mb-3">
+  <div class="col-md-12">
+    <h1>
+      All goals
+    </h1>
+
+    <a href="/goals/new" class="btn btn-block btn-outline-secondary">
+      Add a new goal
+    </a>
+  </div>
+</div>
+
+
+<hr>
+
+<div class="row mb-3">
+  <div class="col-md-12">
+    <table class="table">
+      <tr>
+        <th>
+          User
+        </th>
+        <th>
+          Goal
+        </th>
+
+        <th>
+          Description
+        </th>
+
+
+
+        <th>
+          Goal amount
+        </th>
+
+        <th>
+          Current amount
+        </th>
+
+        <th>
+         Created at
+        </th>
+
+
+        <th>
+        </th>
+      </tr>
+
+      <% @goals.each do |goal| %>
+      <tr>
+
+        <td>
+          <%= User.find(goal.user_id).first_name %>
+        </td>
+
+        <td>
+          <%= goal.name %>
+        </td>
+        <td>
+          <%= goal.description %>
+        </td>
+
+
+
+        <td>
+          <%= goal.goal_amount %>
+        </td>
+
+        <td>
+          <%= goal.current_amount %>
+        </td>
+
+        <td>
+          <%= time_ago_in_words(goal.created_at) %> ago
+        </td>
+
+        <td>
+          <a href="/goals/<%= goal.id %>">
+            Show details
+          </a>
+        </td>
+      </tr>
+      <% end %>
+    </table>
+  </div>
+</div>

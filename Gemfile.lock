@@ -125,6 +125,7 @@ GEM
       rack-test (>= 0.6.3)
       regexp_parser (~> 1.2)
       xpath (~> 3.2)
+    chronic (0.10.2)
     coderay (1.1.2)
     coffee-rails (4.2.2)
       coffee-script (>= 2.2.0)
@@ -145,6 +146,8 @@ GEM
       responders
       warden (~> 1.2.3)
     diff-lcs (1.3)
+    domain_name (0.5.20180417)
+      unf (>= 0.0.5, < 1.0.0)
     dotenv (2.7.1)
     dotenv-rails (2.7.1)
       dotenv (= 2.7.1)
@@ -156,6 +159,8 @@ GEM
     factory_bot_rails (5.0.1)
       factory_bot (~> 5.0.0)
       railties (>= 4.2.0)
+    faraday (0.15.4)
+      multipart-post (>= 1.2, < 3)
     ffi (1.10.0)
     formtastic (3.1.5)
       actionpack (>= 3.2.13)
@@ -168,6 +173,8 @@ GEM
       actionpack (>= 4.1)
       activesupport (>= 4.1)
     hashdiff (0.3.8)
+    http-cookie (1.0.3)
+      domain_name (~> 0.5)
     i18n (1.5.3)
       concurrent-ruby (~> 1.0)
     inherited_resources (1.9.0)
@@ -182,6 +189,7 @@ GEM
       rails-dom-testing (>= 1, < 3)
       railties (>= 4.2.0)
       thor (>= 0.14, < 2.0)
+    jwt (2.1.0)
     kaminari (1.1.1)
       activesupport (>= 4.1.0)
       kaminari-actionview (= 1.1.1)
@@ -207,15 +215,22 @@ GEM
       nokogiri (>= 1.5.9)
     mail (2.7.1)
       mini_mime (>= 0.1.1)
+    mailgun-ruby (1.1.11)
+      rest-client (~> 2.0.2)
     meta_request (0.6.0)
       callsite (~> 0.0, >= 0.0.11)
       rack-contrib (>= 1.1, < 3)
       railties (>= 3.0.0, < 6)
     method_source (0.9.2)
+    mime-types (3.1)
+      mime-types-data (~> 3.2015)
+    mime-types-data (3.2016.0521)
     mini_mime (1.0.1)
     mini_portile2 (2.4.0)
     minitest (5.11.3)
     multi_json (1.13.1)
+    multipart-post (2.0.0)
+    netrc (0.11.0)
     nio4r (2.3.1)
     nokogiri (1.10.1)
       mini_portile2 (~> 2.4.0)
@@ -279,6 +294,10 @@ GEM
     responders (2.4.1)
       actionpack (>= 4.2.0, < 6.0)
       railties (>= 4.2.0, < 6.0)
+    rest-client (2.0.2)
+      http-cookie (>= 1.0.2, < 2.0)
+      mime-types (>= 1.16, < 4.0)
+      netrc (~> 0.8)
     rspec (3.8.0)
       rspec-core (~> 3.8.0)
       rspec-expectations (~> 3.8.0)
@@ -337,12 +356,19 @@ GEM
     turbolinks (5.2.0)
       turbolinks-source (~> 5.2)
     turbolinks-source (5.2.0)
+    twilio-ruby (5.20.1)
+      faraday (~> 0.9)
+      jwt (>= 1.5, <= 2.5)
+      nokogiri (>= 1.6, < 2.0)
     tzinfo (1.2.5)
       thread_safe (~> 0.1)
     tzinfo-data (1.2018.9)
       tzinfo (>= 1.0.0)
     uglifier (4.1.20)
       execjs (>= 0.3.0, < 3)
+    unf (0.1.4)
+      unf_ext
+    unf_ext (0.0.7.5)
     uri-ssh_git (2.0.0)
     warden (1.2.8)
       rack (>= 2.0.6)
@@ -358,6 +384,8 @@ GEM
     websocket-driver (0.6.5)
       websocket-extensions (>= 0.1.0)
     websocket-extensions (0.1.3)
+    whenever (0.10.0)
+      chronic (>= 0.6.3)
     xpath (3.2.0)
       nokogiri (~> 1.8)
 
@@ -372,6 +400,7 @@ DEPENDENCIES
   binding_of_caller
   byebug
   capybara
+  chronic
   console_ip_whitelist!
   dev_toolbar!
   devise
@@ -383,6 +412,7 @@ DEPENDENCIES
   jbuilder (~> 2.5)
   letter_opener
   listen (>= 3.0.5, < 3.2)
+  mailgun-ruby (~> 1.1.6)
   meta_request
   pg
   pry-rails
@@ -395,11 +425,13 @@ DEPENDENCIES
   spring
   spring-watcher-listen (~> 2.0.0f)
   sqlite3 (~> 1.3, < 1.4)
+  twilio-ruby (~> 5.20.1)
   tzinfo-data
   uglifier (>= 1.3.0)
   web-console (>= 3.3.0)
   web_git!
   webmock
+  whenever
 
 BUNDLED WITH
    1.17.2
